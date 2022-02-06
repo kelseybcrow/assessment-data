@@ -236,4 +236,15 @@ module.exports = {
             })
             .catch((err) => console.log('error seeding DB', err))
     },
+
+    getCountries: (req, res) => {
+        sequelize
+            .query(
+                `
+                SELECT * FROM countries
+            `
+            )
+            .then((dbRes) => res.status(200).send(dbRes[0]))
+            .catch((err) => console.log(err))
+    },
 }
