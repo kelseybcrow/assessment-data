@@ -1,8 +1,13 @@
-
+require('dotenv').config()
+const { CONNECTION_STRING } = process.env
+const Sequelize = require('sequelize')
 
 module.exports = {
+    ////// seeding the databasethb
     seed: (req, res) => {
-        sequelize.query(`
+        sequelize
+            .query(
+                `
             drop table if exists cities;
             drop table if exists countries;
 
@@ -209,9 +214,12 @@ module.exports = {
             ('Yemen'),
             ('Zambia'),
             ('Zimbabwe');
-        `).then(() => {
-            console.log('DB seeded!')
-            res.sendStatus(200)
-        }).catch(err => console.log('error seeding DB', err))
-    }
+        `
+            )
+            .then(() => {
+                console.log('DB seeded!')
+                res.sendStatus(200)
+            })
+            .catch((err) => console.log('error seeding DB', err))
+    },
 }
